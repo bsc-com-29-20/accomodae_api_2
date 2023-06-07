@@ -1,0 +1,4 @@
+modelPackage: model # where to store the model files
+apiPackage: api     # where to store the API files
+npmName: my-node-client  # name of your NPM package
+npmVersion: 1.0.0   # version of your NPM package

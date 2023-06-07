@@ -1,0 +1,1 @@
+npx run openapi-generator-cli generate -g typescript-node -o api/accomodae_api -c config.yaml -i accomadae.yaml

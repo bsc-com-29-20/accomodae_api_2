@@ -1,0 +1,199 @@
+openapi: 3.0.0
+info:
+  title: Accomodae API
+  description: RESTful API for Accomodae service
+  version: 1.0.0
+
+paths:
+  /users/authenticate:
+    post:
+      summary: Authenticate user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: Successful authentication
+
+  /users:
+    post:
+      summary: Create a user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+                role:
+                  type: string
+                  enum: [student, property_owner, website_admin]
+      responses:
+        '201':
+          description: User created successfully
+    get:
+      summary: Get a list of users
+      responses:
+        '200':
+          description: Successful operation
+
+  /users/{id}:
+    get:
+      summary: Get user by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+    delete:
+      summary: Delete user by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: User deleted successfully
+
+  /users/{id}/archive:
+    delete:
+      summary: Archive user by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: User archived successfully
+
+  /users/{id}/authorize:
+    post:
+      summary: Authorize user by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: User authorized successfully
+
+  /users/{id}/notifications:
+    get:
+      summary: Get user notifications by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+
+  /users/{id}/status:
+    get:
+      summary: Get user authentication status by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+
+  /users/{id}/listings:
+    post:
+      summary: Create a listing for a user
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+                price:
+                  type: number
+      responses:
+        '201':
+          description: Listing created successfully
+    get:
+      summary: Get listings for a user
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+
+  /users/{id}/listings/{listingId}/subscribe:
+    post:
+      summary: Subscribe to a listing for a user
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: listingId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Subscription created successfully
+
+  /users/{id}/listings/{listingId}/unsubscribe:
+    post:
+      summary: Unsubscribe from a listing for a user
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: listingId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Unsubscription created successfully
